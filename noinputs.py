@@ -50,6 +50,8 @@ class InputDevice(evdev.InputDevice):  # type: ignore
         id = f"[{self.basename.removeprefix('event')}]"
         self._str = f'{id:}\t{{{self.venprod}}}\t"{self.name}"'
 
+        self.disabled = False
+
     def match(self, search: str) -> bool:
         return (
             self.basename == f"event{search}"
@@ -62,6 +64,10 @@ class InputDevice(evdev.InputDevice):  # type: ignore
             f"/sys/class/input/{self.basename}/device/inhibited", "w"
         ) as f:
             f.write("01"[value])
+        if value:
+            self.disabled = True
+        else:
+            self.disabled = False
 
     def get_inhibit(self) -> bool:
         with open(
