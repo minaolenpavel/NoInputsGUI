@@ -12,6 +12,12 @@ from typing import Any, Callable
 import evdev
 from evdev import ecodes
 
+class DefaultArgs:
+    all_devs = True
+    multi = False
+
+args = DefaultArgs()
+
 
 def printe(*args: Any, **kwargs: Any) -> None:
     kwargs["file"] = sys.stderr
@@ -86,9 +92,12 @@ def check_ev_caps(dev: InputDevice) -> bool:
 
 
 def list_devices(*search: str) -> None:
+    devices = []
     for dev in find_devices(*search):
-        print(f"{'X' if dev.get_inhibit() else ' '} {dev}")
+        #print(f"{'X' if dev.get_inhibit() else ' '} {dev}")
+        devices.append(dev)
         dev.close()
+    return devices
 
 
 def find_devices(*search: str) -> list[InputDevice]:
