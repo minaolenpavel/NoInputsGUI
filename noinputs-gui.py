@@ -13,6 +13,8 @@ class MainWindow(QMainWindow):
         self.device_manager = devicemanager.DeviceManager()
 
         uic.loadUi("mainwindow.ui", self)
+        self.setFixedSize(self.width(), self.height())
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
 
         self.model = QStandardItemModel()
         self.model.setHorizontalHeaderLabels(["Name", "Status"])
@@ -22,7 +24,7 @@ class MainWindow(QMainWindow):
         self.deviceTableView.setAlternatingRowColors(True)
         self.deviceTableView.setModel(self.model)
         self.deviceTableView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        # after setting your model on the table view
+        # deviceTableView appearance modifications
         self.deviceTableView.horizontalHeader().setStretchLastSection(False)  # last column doesn't stretch
         self.deviceTableView.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)  # first column stretches
         self.deviceTableView.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)  # status column resizes to content
@@ -67,8 +69,6 @@ class MainWindow(QMainWindow):
             status_item.setText("Disabled")
         else:
             status_item.setText("Enabled")
-
-
 
 app = QApplication(sys.argv)
 window = MainWindow()
