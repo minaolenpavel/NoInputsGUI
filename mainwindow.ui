@@ -14,16 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListView" name="listView">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>751</width>
-      <height>321</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="inhibitButton">
     <property name="geometry">
      <rect>
@@ -48,6 +38,16 @@
     </property>
     <property name="text">
      <string>Enable</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="deviceTableView">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>80</y>
+      <width>781</width>
+      <height>351</height>
+     </rect>
     </property>
    </widget>
   </widget>
