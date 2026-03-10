@@ -5,7 +5,7 @@ from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 import devicemanager
-
+from about_dialog import AboutDialog
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,6 +16,8 @@ class MainWindow(QMainWindow):
         uic.loadUi("mainwindow.ui", self)
         self.setFixedSize(self.width(), self.height())
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
+
+        self.menuAbout.triggered.connect(self.show_about_dialogue)
 
         self.model = QStandardItemModel()
         self.model.setHorizontalHeaderLabels(["Name", "Status"])
@@ -34,6 +36,10 @@ class MainWindow(QMainWindow):
 
         self.inhibitButton.clicked.connect(self.inhibit_selected_device)
         self.uninhibitButton.clicked.connect(self.unhibit_selected_device)
+
+    def show_about_dialogue(self):
+        dialog = AboutDialog(self)
+        dialog.show()
 
     def load_inputs(self):
         devices_list = self.device_manager.devices

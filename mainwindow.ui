@@ -60,23 +60,37 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menuInfo">
     <property name="title">
      <string>Info</string>
     </property>
-    <addaction name="actionGithub"/>
-    <addaction name="actionOriginal_Project"/>
+    <addaction name="menuAbout"/>
    </widget>
-   <addaction name="menuHelp"/>
+   <addaction name="menuInfo"/>
   </widget>
   <action name="actionGithub">
    <property name="text">
     <string>Github</string>
    </property>
   </action>
-  <action name="actionOriginal_Project">
+  <action name="actionOriginalRepo">
    <property name="text">
     <string>Original Project</string>
+   </property>
+  </action>
+  <action name="actionVersion">
+   <property name="text">
+    <string>Version</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="menuAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>
