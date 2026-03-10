@@ -1,4 +1,5 @@
 import sys
+import PyQt6
 from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeaderView
 from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
@@ -71,6 +72,7 @@ class MainWindow(QMainWindow):
             status_item.setText("Enabled")
 
 app = QApplication(sys.argv)
+app.setStyle("Fusion")
 window = MainWindow()
 window.show()
 sys.exit(app.exec())

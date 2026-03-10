@@ -1,4 +1,6 @@
 import noinputs
+import subprocess
+import re
 
 class DeviceManager:
     """
@@ -14,9 +16,19 @@ class DeviceManager:
     def inhibit_device(self, index:int):
         device = self.devices[index]
         if device is not None:
-            device.set_inhibit(True)
+            subprocess.run([
+                "pkexec",
+                "/usr/bin/noinputs",
+                "-i",
+                re.findall(r'[1-9]', device.id)[0]
+            ])
 
     def uninhibit_device(self, index:int):
         device = self.devices[index]
         if device is not None:
-            device.set_inhibit(False)
+            subprocess.run([
+                "pkexec",
+                "/usr/bin/noinputs",
+                "-u",
+                re.findall(r'[1-9]', device.id)[0]
+            ])
