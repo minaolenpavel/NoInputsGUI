@@ -6,12 +6,15 @@ from PyQt6.QtCore import QStringListModel, Qt
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 import devicemanager
 from about_dialog import AboutDialog
+import installer
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.device_manager = devicemanager.DeviceManager()
+
+        
 
         uic.loadUi("mainwindow.ui", self)
         self.setFixedSize(self.width(), self.height())
