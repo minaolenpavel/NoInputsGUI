@@ -47,7 +47,7 @@ class InputDevice(evdev.InputDevice):  # type: ignore
 
         self.venprod = f"{self.vendor}:{self.product}"
 
-        self.id = f"[{self.basename.removeprefix('event')}]"
+        self.id = f"{self.basename.removeprefix('event')}"
         self._str = f'{self.id:}\t{{{self.venprod}}}\t"{self.name}"'
 
     def match(self, search: str) -> bool:
