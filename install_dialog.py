@@ -24,8 +24,8 @@ class InstallDialog(QDialog):
         print("refused")
         self.reject()
 
-app = QApplication(sys.argv)
-app.setStyle("Fusion")
-window = InstallDialog()
-window.show()
-sys.exit(app.exec())
+#app = QApplication(sys.argv)
+#app.setStyle("Fusion")
+#window = InstallDialog()
+#window.show()
+#sys.exit(app.exec())

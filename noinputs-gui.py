@@ -1,11 +1,12 @@
 import sys
 import PyQt6
-from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeaderView
+from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeaderView, QDialog
 from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 import devicemanager
 from about_dialog import AboutDialog
+from install_dialog import InstallDialog
 import installer
 
 class MainWindow(QMainWindow):
@@ -14,7 +15,12 @@ class MainWindow(QMainWindow):
 
         self.device_manager = devicemanager.DeviceManager()
 
-        
+        if not installer.is_installed():
+            install_dialog = InstallDialog(self)
+            if install_dialog.exec() == QDialog.accepted:
+                installer.install()
+            else:
+                exit()
 
         uic.loadUi("mainwindow.ui", self)
         self.setFixedSize(self.width(), self.height())
@@ -60,6 +66,7 @@ class MainWindow(QMainWindow):
         if selected_indexes:
             listview_index = selected_indexes[0]
             index = listview_index.row()
+            print(index)
             self.device_manager.inhibit_device(index)
             self.update_status(index)
 

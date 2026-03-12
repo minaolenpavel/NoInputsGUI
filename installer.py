@@ -30,3 +30,11 @@ def is_installed() -> bool:
     else:
         print("Everything is okay")
         return True
+    
+def install():
+    subprocess.run([
+        "pkexec",
+        "sh",
+        os.path.join(app_dir, "installer.sh"),
+        app_dir
+    ])
