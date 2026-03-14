@@ -1,81 +1,124 @@
-# noinputs
+# NoInputs-GUI
 
-#### A simple script to list and temporarily disable input devices.
+<p align="center">
+  <!-- Replace with your project logo -->
+  <img src="logo.png" alt="NoInputs GUI Logo" width="200"/>
+</p>
 
-This script attempts to provide experience similar to that of `xinput`
-while being Wayland compatible.
+A **simple Linux GUI tool** that allows users to **temporarily disable and re-enable input devices** such as **mice, keyboards, and other input peripherals**.
 
-```
-$ sudo noinputs.py --list
-  [0]   {0000:0001}     "Power Button"
-  [1]   {0000:0001}     "Power Button"
-  [5]   {046D:C092}     "Logitech G102 LIGHTSYNC Gaming Mouse"
-  [6]   {046D:C092}     "Logitech G102 LIGHTSYNC Gaming Mouse Keyboard"
-  [19]  {0000:0000}     "Eee PC WMI hotkeys"
-  [10]  {2333:6666}     "ydotoold virtual device"
-  [2]   {046D:C328}     "Logitech USB Keyboard"
-  [3]   {046D:C328}     "Logitech USB Keyboard Consumer Control"
-  [4]   {046D:C328}     "Logitech USB Keyboard System Control"
-X [11]  {30FA:0301}     "USB OPTICAL MOUSE "
-$ sudo noinputs.py -t 11
-Toggling:
-  [11]  {30FA:0301}     "USB OPTICAL MOUSE "
-```
+This tool is designed specifically for **Wayland environments**, where traditional tools like `xinput` do not work.
 
-### Features:
-
--   Select devices using numeric id, vendor:product or regular expression
--   List device
-    > Inhibited devices are marked with X  
-    > Acts as dry-run, if a list of devices is provided
--   Inhibit devices
-    > The devices will be disabled until they're re-enabled,
-    > re-plugged or the machine reboots
--   Toggle inhibition of devices
--   Grab devices
-    > The devices will be disabled while the program is running
--   Generate udev rules to auto-inhibit unwanted devices automatically
+`NoInputs-GUI` is based on the original CLI project **noinputs**, providing a **graphical interface** for easier device management.
 
 ---
 
-The utility requires superuser permissions to work.
-To avoid having to type the password every time, a sudoers configuration file
-can be added.
+## Features
 
-For example:
+- 🖱️ **List all input devices**
+- ⛔ **Disable (inhibit) input devices**
+- 🔁 **Re-enable disabled devices**
+
+---
+
+## Current Status
+
+⚠️ **Stable Beta**
+
+- Tested only on:
+  - **Arch Linux**
+  - **CachyOS**
+
+Other distributions may work but are **currently untested**.
+
+---
+
+## Wayland Only
+
+This project targets **Wayland users**.
+
+For **X11 users**, tools such as:
+
+- `xinput`
+- `xinput disable`
+- other X11 utilities
+
+already provide similar functionality.
+
+`NoInputs-GUI` exists to fill this **missing functionality under Wayland**.
+
+---
+
+## Installation
+
+Currently, the application is **not available in the Arch repositories**.
+
+Installation is done by downloading the binary from the **GitHub Releases** page.
+
+### 1. Download the latest release
+
+Go to the **Releases** section of this repository and download the archive.
+
+### 2. Extract the archive
 
 ```
-# /etc/sudoers.d/noinputs
-
-%wheel ALL=(root) NOPASSWD:/usr/bin/noinputs
+unzip noinputs-0.1.0.zip 
 ```
 
-will allow any member of the group "wheel" to use the utility without password
-verification.
+Inside the archive you will find 
 
-### Installation:
+```
+noinputs_gui.bin
+```
 
-[Available on AUR](https://aur.archlinux.org/packages/noinputs-git) for
-Arch Linux based systems.
+### 3. Make it executable
 
-Manual installation:
+```bash
+chmod +x NoInputs-GUI.bin
+```
 
--   Place `noinputs.py` in `/usr/local/bin` and mark it as executable
-    ```sh
-    # As root
-    cp noinputs.py /usr/local/bin/noinputs
-    chmod +x /usr/local/bin/noinputs
-    ```
--   Install evdev library for python:
-    | | |
-    |-|-|
-    | **Arch Linux** & friends | `pacman -S python-evdev` |
-    | **Ubuntu, Debian** & friends | `apt install python3-evdev` |
-    | **Fedora** & friends | `dnf install python3-evdev` |
-    | **Alpine** | `apk add py3-evdev` |
-    For other distros see [repology](https://repology.org/project/python:evdev/versions)
+### 4. Run it
 
--   Use it as usual. E.g.:
-    ```sh
-    sudo noinputs -l # List input devices
-    ```
+```bash
+./NoInputs-GUI.bin
+```
+
+### 5. Create a shortcut
+
+For conveniency, I would advise to create a desktop shortcut or a symbolic link to launch it where it's convenient for you.
+
+### 6. Installation
+
+The first time you run the program, you will be prompted to "install" the program, it will run the `installer.sh` script available in the source code. It will essentially create an udev rule so the program can access your devices. 
+However the program will prompt you everytime you want to disable a device.
+
+
+## Example Usage
+
+Once launched, the GUI will:
+- List all available input devices
+- Allow you to select a device
+- Disable or re-enable it with a button
+
+Disabled devices remain inhibited until:
+- they are re-enabled
+- the device is unplugged
+- the system reboots
+
+## Credits
+
+[The original project provides](https://gitlab.com/S410/noinputs) the underlying concept and functionality for Wayland input inhibition.
+
+## Contributing
+
+Feedback, bug reports, and suggestions are appreciated.
+
+I won't allow any contribution to this repository for safety measures, but you are welcome to fork it and reuse my code as you please. But take into consideration I am not responsible for anything happening with the source code outside of this repository.
+
+If you encounter issues, please open an Issue on this repository.
+
+## License 
+
+The project is under the GNU GPL-3.0 License as is the original project. 
+
+See the `LICENSE` for details.
