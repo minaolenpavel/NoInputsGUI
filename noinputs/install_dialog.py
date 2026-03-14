@@ -1,13 +1,12 @@
 from PyQt6.QtWidgets import QApplication, QDialog
 from PyQt6 import uic
 from PyQt6.QtCore import Qt
-import sys, os
+import sys
 
 class InstallDialog(QDialog):
     def __init__(self, parent = None):
         super().__init__(parent)
-        ui_path = os.path.join(os.path.dirname(__file__), "ui", "install_dialog.ui")
-        uic.loadUi(ui_path, self)
+        uic.loadUi("install_dialog.ui", self)
         # Set size as fixed
         self.setFixedSize(self.width(), self.height())
         # Hide extend window button
