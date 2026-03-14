@@ -2,7 +2,6 @@ from PyQt6.QtWidgets import QApplication, QDialog
 from PyQt6 import uic
 from PyQt6.QtCore import Qt
 import sys
-from __version__ import __version__
 
 class InstallDialog(QDialog):
     def __init__(self, parent = None):
@@ -17,15 +16,7 @@ class InstallDialog(QDialog):
         self.btnYesNo.rejected.connect(self.installation_canceled)
     
     def installation_accepted(self):
-        print("accepted")
         self.accept()
-
+        
     def installation_canceled(self):
-        print("refused")
         self.reject()
-
-#app = QApplication(sys.argv)
-#app.setStyle("Fusion")
-#window = InstallDialog()
-#window.show()
-#sys.exit(app.exec())

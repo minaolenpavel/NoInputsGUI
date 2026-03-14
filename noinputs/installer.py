@@ -28,7 +28,6 @@ def is_installed() -> bool:
         print("Installation is missing")
         return False
     else:
-        print("Everything is okay")
         return True
     
 def install():

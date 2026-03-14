@@ -4,7 +4,7 @@ from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 import sys
-from __version__ import __version__
+from __version__ import version
 
 class AboutDialog(QDialog):
     def __init__(self, parent =None):
@@ -16,7 +16,7 @@ class AboutDialog(QDialog):
         # Hide extend window button
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
 
-        self.versionLabel.setText(f"Version : {__version__}")
+        self.versionLabel.setText(f"Version : {version}")
 
         self.githubLabel.setText('<a href="https://github.com/minaolenpavel/NoInputsGUI">GitHub Repo</a>')
         self.githubLabel.setOpenExternalLinks(True)

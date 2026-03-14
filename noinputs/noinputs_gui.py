@@ -1,5 +1,4 @@
 import sys
-import PyQt6
 from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeaderView, QDialog
 from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
@@ -17,12 +16,13 @@ class MainWindow(QMainWindow):
 
         if not installer.is_installed():
             install_dialog = InstallDialog(self)
-            if install_dialog.exec() == QDialog.accepted:
+            if install_dialog.exec() == QDialog.DialogCode.Accepted:
+                print("installing")
                 installer.install()
             else:
                 exit()
 
-        uic.loadUi("mainwindow.ui", self)
+        uic.loadUi("./ui/mainwindow.ui", self)
         self.setFixedSize(self.width(), self.height())
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
 
@@ -87,8 +87,11 @@ class MainWindow(QMainWindow):
         else:
             status_item.setText("Enabled")
 
-app = QApplication(sys.argv)
-app.setStyle("Fusion")
-window = MainWindow()
-window.show()
-sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setStyle("Fusion")
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())

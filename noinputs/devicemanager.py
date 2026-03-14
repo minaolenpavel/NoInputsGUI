@@ -19,7 +19,6 @@ class DeviceManager:
     def inhibit_device(self, index:int):
         device = self.devices[index]
         if device is not None:
-            print(re.findall(r'[1-9]', device.id)[0])
             subprocess.run([
                 "pkexec",
                 sys.executable, # Point to the app image python interpreter
