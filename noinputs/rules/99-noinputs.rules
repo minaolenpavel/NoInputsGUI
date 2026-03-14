@@ -1,0 +1,7 @@
+# /etc/udev/rules.d/99-noinputs.rules
+
+# Match all input event devices
+KERNEL=="event*", MODE="0660", GROUP="noinputs"
+
+# Match joysticks/gamepads
+KERNEL=="js*", MODE="0660", GROUP="noinputs"

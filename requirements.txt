@@ -1,4 +1,8 @@
+altgraph==0.17.5
 evdev==1.9.3
+packaging==26.0
+pyinstaller==6.19.0
+pyinstaller-hooks-contrib==2026.3
 pyping==0.0.6
 PyQt6==6.10.2
 PyQt6-Qt6==6.10.2
@@ -6,4 +10,5 @@ PyQt6_sip==13.11.0
 PySide6==6.10.2
 PySide6_Addons==6.10.2
 PySide6_Essentials==6.10.2
+setuptools==82.0.1
 shiboken6==6.10.2

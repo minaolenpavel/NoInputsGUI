@@ -47,8 +47,8 @@ class InputDevice(evdev.InputDevice):  # type: ignore
 
         self.venprod = f"{self.vendor}:{self.product}"
 
-        id = f"[{self.basename.removeprefix('event')}]"
-        self._str = f'{id:}\t{{{self.venprod}}}\t"{self.name}"'
+        self.id = f"{self.basename.removeprefix('event')}"
+        self._str = f'{self.id:}\t{{{self.venprod}}}\t"{self.name}"'
 
     def match(self, search: str) -> bool:
         return (
@@ -94,7 +94,7 @@ def check_ev_caps(dev: InputDevice) -> bool:
 def list_devices(*search: str) -> None:
     devices = []
     for dev in find_devices(*search):
-        #print(f"{'X' if dev.get_inhibit() else ' '} {dev}")
+        print(f"{'X' if dev.get_inhibit() else ' '} {dev}")
         devices.append(dev)
         dev.close()
     return devices

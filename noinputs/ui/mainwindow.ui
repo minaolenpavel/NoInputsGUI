@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>797</width>
-    <height>530</height>
+    <height>421</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>440</y>
+      <y>370</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>440</y>
+      <y>370</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -44,7 +44,7 @@
     <property name="geometry">
      <rect>
       <x>5</x>
-      <y>80</y>
+      <y>10</y>
       <width>781</width>
       <height>351</height>
      </rect>
@@ -60,24 +60,37 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHelp">
+   <widget class="QMenu" name="menuInfo">
     <property name="title">
-     <string>Help</string>
+     <string>Info</string>
     </property>
-    <addaction name="actionGithub"/>
-    <addaction name="actionOriginal_Project"/>
+    <addaction name="menuAbout"/>
    </widget>
-   <addaction name="menuHelp"/>
+   <addaction name="menuInfo"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionGithub">
    <property name="text">
     <string>Github</string>
    </property>
   </action>
-  <action name="actionOriginal_Project">
+  <action name="actionOriginalRepo">
    <property name="text">
     <string>Original Project</string>
+   </property>
+  </action>
+  <action name="actionVersion">
+   <property name="text">
+    <string>Version</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="menuAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

@@ -1,10 +1,13 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeaderView
+from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeaderView, QDialog
 from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 import devicemanager
-
+from about_dialog import AboutDialog
+from install_dialog import InstallDialog
+import installer
+import os
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -12,9 +15,19 @@ class MainWindow(QMainWindow):
 
         self.device_manager = devicemanager.DeviceManager()
 
-        uic.loadUi("mainwindow.ui", self)
+        if not installer.is_installed():
+            install_dialog = InstallDialog(self)
+            if install_dialog.exec() == QDialog.DialogCode.Accepted:
+                print("installing")
+                installer.install()
+            else:
+                exit()
+        ui_path = os.path.join(os.path.dirname(__file__), "ui", "mainwindow.ui")
+        uic.loadUi(ui_path, self)
         self.setFixedSize(self.width(), self.height())
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
+
+        self.menuAbout.triggered.connect(self.show_about_dialogue)
 
         self.model = QStandardItemModel()
         self.model.setHorizontalHeaderLabels(["Name", "Status"])
@@ -34,6 +47,10 @@ class MainWindow(QMainWindow):
         self.inhibitButton.clicked.connect(self.inhibit_selected_device)
         self.uninhibitButton.clicked.connect(self.unhibit_selected_device)
 
+    def show_about_dialogue(self):
+        dialog = AboutDialog(self)
+        dialog.show()
+
     def load_inputs(self):
         devices_list = self.device_manager.devices
         for d in devices_list:
@@ -50,6 +67,7 @@ class MainWindow(QMainWindow):
         if selected_indexes:
             listview_index = selected_indexes[0]
             index = listview_index.row()
+            print(index)
             self.device_manager.inhibit_device(index)
             self.update_status(index)
 
@@ -70,7 +88,11 @@ class MainWindow(QMainWindow):
         else:
             status_item.setText("Enabled")
 
-app = QApplication(sys.argv)
-window = MainWindow()
-window.show()
-sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setStyle("Fusion")
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
