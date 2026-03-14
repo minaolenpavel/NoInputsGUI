@@ -3,13 +3,14 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QAbstractItemView, QHeade
 from PyQt6 import uic
 from PyQt6.QtCore import QStringListModel, Qt
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
-import sys
+import sys, os
 from __version__ import version
 
 class AboutDialog(QDialog):
     def __init__(self, parent =None):
         super().__init__(parent)
-        uic.loadUi("about_dialog.ui", self)
+        ui_path = os.path.join(os.path.dirname(__file__), "ui", "about_dialog.ui")
+        uic.loadUi(ui_path, self)
         self.okBtn.clicked.connect(self.close)
         # Set size as fixed
         self.setFixedSize(self.width(), self.height())
