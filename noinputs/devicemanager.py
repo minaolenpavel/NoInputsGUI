@@ -19,21 +19,39 @@ class DeviceManager:
     def inhibit_device(self, index:int):
         device = self.devices[index]
         if device is not None:
-            subprocess.run([
-                "pkexec",
-                sys.executable, # Point to the app image python interpreter
-                os.path.join(self.app_dir, "noinputs.py"),
-                "-i",
-                device.id
-            ])
+            try: 
+                subprocess.run([
+                    "pkexec",
+                    "/usr/bin/python3", # Point to the app image python interpreter
+                    os.path.join(self.app_dir, "noinputs.py"),
+                    "-i",
+                    device.id
+                ])
+            except:
+                subprocess.run([
+                    "pkexec",
+                    "/usr/bin/python3", # Point to the app image python interpreter
+                    os.path.join(self.app_dir, "noinputs.py"),
+                    "-i",
+                    device.id
+                ])
 
     def uninhibit_device(self, index:int):
         device = self.devices[index]
         if device is not None:
-            subprocess.run([
-                "pkexec",
-                sys.executable,
-                os.path.join(self.app_dir, "noinputs.py"),
-                "-u",
-                device.id
-            ])
+            try: 
+                subprocess.run([
+                    "pkexec",
+                    "/usr/bin/python3", # Point to the app image python interpreter
+                    os.path.join(self.app_dir, "noinputs.py"),
+                    "-u",
+                    device.id
+                ])
+            except:
+                subprocess.run([
+                    "pkexec",
+                    "/usr/bin/python3", # Point to the app image python interpreter
+                    os.path.join(self.app_dir, "noinputs.py"),
+                    "-u",
+                    device.id
+                ])

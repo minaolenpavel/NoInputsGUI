@@ -7,6 +7,7 @@ import devicemanager
 from about_dialog import AboutDialog
 from install_dialog import InstallDialog
 import installer
+import os
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -21,8 +22,8 @@ class MainWindow(QMainWindow):
                 installer.install()
             else:
                 exit()
-
-        uic.loadUi("./ui/mainwindow.ui", self)
+        ui_path = os.path.join(os.path.dirname(__file__), "ui", "mainwindow.ui")
+        uic.loadUi(ui_path, self)
         self.setFixedSize(self.width(), self.height())
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowMaximizeButtonHint)
 
